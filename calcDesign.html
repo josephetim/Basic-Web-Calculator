@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./calc.css">
+    <script type="javascript" src="./index.js"></script>
+    <title>Calc</title>
+</head>
+<body>
+    
+    <div class="align-center">
+    <div class="container">
+        <textarea class="full-width" readonly id="output"></textarea>
+        <button id="clear" value="">AC</button>
+        <button id="division" value="/">/</button>
+        <button id="multiplication" value="*">X</button>
+        <button id="subtraction" value="-">-</button>
+        <button id="7" value="7">7</button>
+        <button id="8" value="8">8</button>
+        <button id="9" value="9">9</button>
+        <button class="double-height" id="addition" value="+">+</button>
+        <button id="4" value="4">4</button>
+        <button id="5" value="5">5</button>
+        <button id="6" value="6">6</button>
+        <button id="1" value="1">1</button>
+        <button id="2" value="2">2</button>
+        <button id="3" value="3">3</button>
+        <button id="0" value="">0</button>
+        <button  id="." value=".">.</button>
+        <button class="double-space"  id="equalTo" value="">=</button>
+    </div>
+</div>
+<script>
+    
+        
+        //Initializing the values
+        let state = [];
+        let digitMemory = ""
+        let keyLog = 0;
+        let output = document.getElementById('output')
+        output.value = ''
+        //init
+       const keyPress = function() {
+        //If it is a number
+            
+            if ((((Number(this.value)) <= 10 || this.id == "." ) && state.length <=3) || (!(Number(this.value) <= 10) && state.length == 0 || state.length == 2)) {
+                console.log("number");
+                console.log(state);
+                //Append the number to the Textarea
+                output.value += this.value;
+                digitMemory += this.value;
+                if ((state.length == 0) || (state.length ==1)) {
+                    state[0] = Number(digitMemory)
+                } else if ((state.length >= 2) && (state.length <4) ) {
+                    state[2] = Number(digitMemory)
+                }
+                console.log(output.value)
+                console.log(digitMemory)
+                console.log(state);
+                //Keylog the value
+
+                //Else If the button is an operator
+            } else if (!(Number(this.value) <= 10) && state.length <= 3) {
+                console.log("operator");
+                digitMemory = ''
+                //Push KeyLog to array
+                
+                console.log(state);
+                if (state.length === 3) {
+                    console.log('state = 3')
+                    if (state[1] == '+') {
+                        state=[state[0] + state[2]];
+                        output.value = state[0]
+                    } else if (state[1] == '-') {
+                        state=[state[0] - state[2]];
+                        output.value = state[0]
+                    } else if (state[1] == '*') {
+                        state=[state[0] * state[2]];
+                        output.value = state[0]
+                    } 
+                }
+                //Push the new operator to the state
+                state.push(this.value);
+
+                //Update the textarea
+                output.value += this.value
+                console.log(state)
+            } 
+            if (this.id == 'equalTo') {
+                if (state.length === 3) {
+                    console.log("I am 3")
+                    if (state[1] == '+') {
+                        console.log("Addition")
+                        state=[state[0] + state[2]];
+                        output.value = state[0]
+                    } else if (state[1] == '-') {
+                        console.log("Subtraction")
+                        state=[state[0] - state[2]];
+                        output.value = state[0]
+                    } else if (state[1] == '*') {
+                        console.log("Multiplication")
+                        state=[state[0] * state[2]];
+                        output.value = state[0]
+                    } 
+                }
+                else {
+                    output.value = this.value
+                }
+            }
+            if (this.id == 'clear') {
+                state = [];
+                digitMemory = ""
+                output.value = ""
+            }
+
+        }
+
+
+       document.getElementById('1').onclick = keyPress;
+       document.getElementById('2').onclick = keyPress;
+       document.getElementById('3').onclick = keyPress;
+       document.getElementById('4').onclick = keyPress;
+       document.getElementById('5').onclick = keyPress;
+       document.getElementById('6').onclick = keyPress;
+       document.getElementById('7').onclick = keyPress;
+       document.getElementById('8').onclick = keyPress;
+       document.getElementById('9').onclick = keyPress;
+       document.getElementById('.').onclick = keyPress;
+       document.getElementById('addition').onclick = keyPress;
+       document.getElementById('subtraction').onclick = keyPress;
+       document.getElementById('multiplication').onclick = keyPress;
+       document.getElementById('equalTo').onclick = keyPress;
+       document.getElementById('clear').onclick = keyPress;
+       document.getElementById('clear').onclick = keyPress;
+
+</script>
+</body>
+</html>
