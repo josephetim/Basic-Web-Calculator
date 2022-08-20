@@ -103,6 +103,10 @@
                         console.log("Multiplication")
                         state=[state[0] * state[2]];
                         output.value = state[0]
+                    } else if (state[1] == '/') {
+                        console.log("Division")
+                        state=[state[0] / state[2]];
+                        output.value = state[0]
                     } 
                 }
                 else {
@@ -131,10 +135,10 @@
        document.getElementById('addition').onclick = keyPress;
        document.getElementById('subtraction').onclick = keyPress;
        document.getElementById('multiplication').onclick = keyPress;
+       document.getElementById('division').onclick = keyPress;
        document.getElementById('equalTo').onclick = keyPress;
        document.getElementById('clear').onclick = keyPress;
-       document.getElementById('clear').onclick = keyPress;
-
+      
 </script>
 </body>
 </html>
